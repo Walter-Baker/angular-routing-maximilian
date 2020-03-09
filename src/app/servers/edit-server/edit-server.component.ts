@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable } from 'rxjs'; // Not sure if needed.
+import { ServersService } from '../servers.service';
 
 @Component({
     selector: 'app-edit-server',
@@ -8,7 +11,10 @@ import { Component, OnInit } from '@angular/core';
 export class EditServerComponent implements OnInit {
     server: {id: number, name: string, status: string};
 
-    constructor(){}
+    constructor(private serversService: ServersService,
+                private route: ActivatedRoute,
+                private router: Router) {
+    }   
 
     ngOnInit(){
         
