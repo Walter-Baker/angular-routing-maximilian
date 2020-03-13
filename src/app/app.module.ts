@@ -15,7 +15,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
-import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.service';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { ServerResolver } from './servers/server/server-resolver.service';
 
@@ -36,7 +35,7 @@ import { ServerResolver } from './servers/server/server-resolver.service';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [ServersService, AuthService, AuthGuard, CanDeactivateGuard, ServerResolver],
+  providers: [ServersService, AuthService, AuthGuard, ServerResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
