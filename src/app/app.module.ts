@@ -9,6 +9,7 @@ import { UsersComponent } from './users/users.component';
 import { ServersComponent } from './servers/servers.component';
 import { UserComponent } from './users/user/user.component';
 import { EditServerComponent } from './servers/edit-server/edit-server.component';
+import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.service';
 import { ServerComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -35,7 +36,7 @@ import { ServerResolver } from './servers/server/server-resolver.service';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [ServersService, AuthService, AuthGuard, ServerResolver],
+  providers: [ServersService, AuthService, AuthGuard, ServerResolver, CanDeactivateGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
