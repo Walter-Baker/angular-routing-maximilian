@@ -13,7 +13,6 @@ export class EditServerComponent implements OnInit {
   server: {id: number, name: string, status: string};
   serverName = '';
   serverStatus = '';
-  changesSaved = false;
 
   constructor(private serversService: ServersService,
               private route: ActivatedRoute,
