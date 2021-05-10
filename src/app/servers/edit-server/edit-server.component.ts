@@ -55,4 +55,30 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
       return true;
     }
   }
+
+  CanDeactivateForEditItem(
+              allowEdit: boolean | null,
+              navAwayConfirmMessage: string | null,
+              itemIsModified: boolean | null,
+              itemChangesIsSaved: boolean | null
+  ):
+    Observable<boolean> | Promise<boolean> | boolean
+  {
+      if (allowEdit == true) {
+          return true;
+      }
+
+      if (itemIsModified && itemChangesIsSaved) {
+          
+          if(navAwayConfirmMessage == null){
+              return confirm('Do you want to discard the changes?');
+          } else {
+              return confirm(navAwayConfirmMessage);    
+          }
+          
+      } else {
+          return true;
+      }
+  }
+
 }
