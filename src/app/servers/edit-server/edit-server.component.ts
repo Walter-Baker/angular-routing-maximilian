@@ -49,7 +49,7 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
     return this.serverName !== this.server.name || this.serverStatus !== this.server.status;
   }
 
-/*
+/* Original
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.allowEdit) {
       return true;
@@ -62,6 +62,7 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   }
 */
 
+// Works
 /*
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.allowEdit) {
@@ -77,19 +78,30 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
 
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    let IsItemModified = this.IsItemModified();
+    // Original
+
     return this.CanDeactivateForEditItem(
       this.allowEdit,
       "Discard changes?",
-      this.IsItemModified,
+      IsItemModified,
       this.changesSaved
     );
+
+
+    // Mock    
+    /*
+    return this.CanDeactivateForEditItemMock(
+      this.IsItemModified
+    );
+    */
   }
 
 
   CanDeactivateForEditItem(
               allowEdit: boolean | null,
               navAwayConfirmMessage: string | null,
-              itemIsModified: () => boolean | null,
+              itemIsModified: boolean | null,
               itemChangesIsSaved: boolean | null
   ):
     Observable<boolean> | Promise<boolean> | boolean
@@ -98,15 +110,28 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
           return true;
       }
 
-      let IsItemModified = itemIsModified();
-
-      if (IsItemModified == true && (itemChangesIsSaved == false)) {
+      if (itemIsModified == true && (itemChangesIsSaved == false)) {
           
           if(navAwayConfirmMessage == null){
               return confirm('Do you want to discard the changes?');
           } else {
               return confirm(navAwayConfirmMessage);    
           }
+      } else {
+          return true;
+      }
+  }
+
+  CanDeactivateForEditItemMock(
+              itemIsModified: () => boolean | null,
+  ):
+    Observable<boolean> | Promise<boolean> | boolean
+  {
+      let IsItemModified = itemIsModified();
+
+      if (IsItemModified == true) {
+          
+        return confirm('Do you want to discard the changes?');
       } else {
           return true;
       }
