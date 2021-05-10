@@ -46,8 +46,7 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   }
 
   IsItemModified(): boolean{
-    return this.serverName !== this.server.name ||
-           this.serverStatus !== this.server.status;
+    return this.serverName !== this.server.name || this.serverStatus !== this.server.status;
   }
 
 /*
@@ -90,7 +89,7 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   CanDeactivateForEditItem(
               allowEdit: boolean | null,
               navAwayConfirmMessage: string | null,
-              itemIsModified: () => boolean,
+              itemIsModified: () => boolean | null,
               itemChangesIsSaved: boolean | null
   ):
     Observable<boolean> | Promise<boolean> | boolean
