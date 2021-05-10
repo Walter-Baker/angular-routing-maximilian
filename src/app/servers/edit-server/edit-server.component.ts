@@ -98,7 +98,9 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
           return true;
       }
 
-      if (itemIsModified() == true && (itemChangesIsSaved == false)) {
+      let IsItemModified = itemIsModified();
+
+      if (IsItemModified == true && (itemChangesIsSaved == false)) {
           
           if(navAwayConfirmMessage == null){
               return confirm('Do you want to discard the changes?');
