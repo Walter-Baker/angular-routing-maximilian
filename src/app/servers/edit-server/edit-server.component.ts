@@ -12,10 +12,10 @@ import { CanComponentDeactivate } from './can-deactivate-guard.service';
 })
 export class EditServerComponent implements OnInit, CanComponentDeactivate {
   server: {id: number, name: string, status: string};
-  serverName = '';
-  serverStatus = '';
-  allowEdit = false;
-  changesSaved = false;
+  serverName: string = '';
+  serverStatus: string = '';
+  allowEdit: boolean = false;
+  changesSaved: boolean = false;
 
   constructor(private serversService: ServersService,
               private route: ActivatedRoute,
@@ -45,6 +45,11 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
+  IsItemModified(): boolean{
+    return this.serverName !== this.server.name ||
+           this.serverStatus !== this.server.status;
+  }
+
 /*
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.allowEdit) {
@@ -57,10 +62,19 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
     }
   }
 */
-  IsItemModified(): boolean{
-    return this.serverName !== this.server.name ||
-           this.serverStatus !== this.server.status;
+
+/*
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (!this.allowEdit) {
+      return true;
+    }
+    if (this.IsItemModified() && !this.changesSaved) {
+      return confirm('Do you want to discard the changes?');
+    } else {
+      return true;
+    }
   }
+*/
 
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
@@ -76,7 +90,7 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   CanDeactivateForEditItem(
               allowEdit: boolean | null,
               navAwayConfirmMessage: string | null,
-              itemIsModified: () => boolean | null,
+              itemIsModified: () => boolean,
               itemChangesIsSaved: boolean | null
   ):
     Observable<boolean> | Promise<boolean> | boolean
@@ -85,7 +99,7 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
           return true;
       }
 
-      if (itemIsModified() && itemChangesIsSaved) {
+      if (itemIsModified() == true && (itemChangesIsSaved == false)) {
           
           if(navAwayConfirmMessage == null){
               return confirm('Do you want to discard the changes?');
