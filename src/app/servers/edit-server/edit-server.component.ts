@@ -45,6 +45,7 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
+/*
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.allowEdit) {
       return true;
@@ -55,27 +56,42 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
       return true;
     }
   }
+*/
+  IsItemModified(): boolean{
+    return this.serverName !== this.server.name ||
+           this.serverStatus !== this.server.status;
+  }
+
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    return this.CanDeactivateForEditItem(
+      this.allowEdit,
+      "Discard changes?",
+      this.IsItemModified,
+      this.changesSaved
+    );
+  }
+
 
   CanDeactivateForEditItem(
               allowEdit: boolean | null,
               navAwayConfirmMessage: string | null,
-              itemIsModified: boolean | null,
+              itemIsModified: () => boolean | null,
               itemChangesIsSaved: boolean | null
   ):
     Observable<boolean> | Promise<boolean> | boolean
   {
-      if (allowEdit == true) {
+      if (allowEdit == false) {
           return true;
       }
 
-      if (itemIsModified && itemChangesIsSaved) {
+      if (itemIsModified() && itemChangesIsSaved) {
           
           if(navAwayConfirmMessage == null){
               return confirm('Do you want to discard the changes?');
           } else {
               return confirm(navAwayConfirmMessage);    
           }
-          
       } else {
           return true;
       }
