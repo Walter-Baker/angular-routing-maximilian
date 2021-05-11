@@ -1,3 +1,17 @@
+interface IId{
+    id: number;
+}
+
+function GetById(group: IId[], id: number) {
+    const item = group.find(
+      (s) => {
+        return s.id === id;
+      }
+    );
+    
+    return item;
+}
+
 export class ServersService {
   private servers = [
     {
@@ -21,6 +35,7 @@ export class ServersService {
     return this.servers;
   }
 
+/*
   getServer(id: number) {
     const server = this.servers.find(
       (s) => {
@@ -28,6 +43,11 @@ export class ServersService {
       }
     );
     return server;
+  }
+*/
+
+  getServer(id: number) {
+    return GetById(this.servers, id)
   }
 
   updateServer(id: number, serverInfo: {name: string, status: string}) {

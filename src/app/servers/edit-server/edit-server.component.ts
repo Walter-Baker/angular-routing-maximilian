@@ -62,21 +62,6 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   }
 */
 
-// Works
-/*
-  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-    if (!this.allowEdit) {
-      return true;
-    }
-    if (this.IsItemModified() && !this.changesSaved) {
-      return confirm('Do you want to discard the changes?');
-    } else {
-      return true;
-    }
-  }
-*/
-
-
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     let IsItemModified = this.IsItemModified();
     // Original
