@@ -14,7 +14,12 @@ function GetById(group: IId[], id: number) {
 
 function UpdateItemFromValues(obj: any, values: any){
     for (const [key, value] of Object.entries(values)) {
-        obj[key] = value;
+        //console.log(`${key}: ${value}`);
+
+        if(key in obj){
+            obj[key] = value;
+            //console.log(obj[key]);
+        }    
     }
 }
 
