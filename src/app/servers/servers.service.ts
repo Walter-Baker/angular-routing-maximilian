@@ -1,3 +1,5 @@
+import { GetByFieldValues } from 'ay-array-functions';
+
 interface IId{
     id: number;
 }
@@ -58,7 +60,13 @@ export class ServersService {
 */
 
   getServer(id: number) {
-    return GetById(this.servers, id)
+    //return GetById(this.servers, id);
+    const query = {id: id};
+
+    let items = GetByFieldValues(this.servers, query );
+    console.log(items);
+
+    return items[0];
   }
 
 /*
