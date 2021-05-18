@@ -1,18 +1,4 @@
-import { GetByFieldValues } from 'ay-array-functions';
-
-interface IId{
-    id: number;
-}
-
-function GetById(group: IId[], id: number) {
-    const item = group.find(
-      (s) => {
-        return s.id === id;
-      }
-    );
-    
-    return item;
-}
+import { GetByFieldValues, GetById } from 'ay-array-functions';
 
 function UpdateItemFromValues(obj: any, values: any){
     for (const [key, value] of Object.entries(values)) {
@@ -60,7 +46,6 @@ export class ServersService {
 */
 
   getServer(id: number) {
-    //return GetById(this.servers, id);
     const query = {id: id};
 
     let items = GetByFieldValues(this.servers, query );
