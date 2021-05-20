@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class HeaderComponent {
   @Input() homeLink: string = "/";
-  @Input() routerLink1: string = "servers";
-  @Input() routerLink2: string = "users";
+  @Input() routerLink1: string;
+  @Input() routerLink2: string;
 
 }

@@ -23,6 +23,7 @@ import { ServerResolver } from './servers/server/server-resolver.service';
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
     HomeComponent,
     UsersComponent,
     ServersComponent,
